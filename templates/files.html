@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Files List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Available Files</h1>
+        </div>
+    </header>
+    <main class="container">
+        <ul class="file-list">
+            {% for file in files %}
+                <li>
+                    <a href="{{ url_for('uploaded_file', filename=file) }}" class="file-link" download>{{ file }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div id="download-progress-container">
+            <div id="download-progress-bar"></div>
+        </div>
+    </main>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        var socket = io();
+        socket.on('download_progress', function(data) {
+            var progress = data.progress.toFixed(2);
+            document.getElementById('download-progress-bar').style.width = progress + '%';
+            document.getElementById('download-progress-bar').innerText = progress + '%';
+        });
+    </script>
+</body>
+</html>
+

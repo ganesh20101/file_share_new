@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    text-align: center;
+    margin: 20px 0;
+}
+
+nav a {
+    display: inline-block;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: #ddd;
+    margin: 0 10px;
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background: #bbb;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.welcome-message {
+    text-align: center;
+    margin: 20px;
+}
+
+form {
+    text-align: center;
+    margin: 20px;
+}
+
+input[type="file"], input[type="text"], input[type="password"], button {
+    margin: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
+
+#upload-progress-container, #download-progress-container {
+    margin-top: 20px;
+    width: 100%;
+    background: #e0e0e0;
+    border-radius: 5px;
+    height: 20px;
+    overflow: hidden;
+}
+
+#upload-progress-bar, #download-progress-bar {
+    height: 100%;
+    background: #76c7c0;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+    width: 0;
+    transition: width 0.5s;
+}
+
+ul.file-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px; /* Make space for the progress bar */
+}
+
+ul.file-list li {
+    margin-bottom: 10px;
+}
+
+a.file-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
