@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials-id'   // Jenkins Credentials ID for Docker Hub
         DOCKERHUB_REPO = 'ganesh20101/fileshare'              // Your Docker Hub repository
-        FIXED_IMAGE_TAG = '24.0.003'                            // Fixed image tag
+        FIXED_IMAGE_TAG = '24.0.03'                            // Fixed image tag
     }
 
     stages {
