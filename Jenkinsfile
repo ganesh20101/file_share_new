@@ -4,14 +4,14 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials-id'   // Jenkins Credentials ID for Docker Hub
         DOCKERHUB_REPO = 'ganesh20101/fileshare'              // Your Docker Hub repository
-        FIXED_IMAGE_TAG = '24.0.03'                            // Fixed image tag
+        FIXED_IMAGE_TAG = '24.0.003'                            // Fixed image tag
     }
 
     stages {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning repository'
-                git 'https://github.com/ganesh20101/file_share_new.git'
+                git url: 'https://github.com/ganesh20101/file_share_new.git', branch: 'main'
             }
         }
 
@@ -22,16 +22,17 @@ pipeline {
                     def commitHash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                     def branchName = env.BRANCH_NAME
                     
-                    // Define the Docker image tag with commit hash and branch name
+                    // Define the Docker image tag with commit hash, branch name, and fixed tag
                     def imageTag = "${DOCKERHUB_REPO}:${commitHash}"
                     def branchTag = "${DOCKERHUB_REPO}:${branchName}"
+                    def fixedTag = "${DOCKERHUB_REPO}:${FIXED_IMAGE_TAG}"
 
-                    echo "Building Docker image with tags: ${imageTag}, ${branchTag}, ${DOCKERHUB_REPO}:${FIXED_IMAGE_TAG}"
+                    echo "Building Docker image with tags: ${imageTag}, ${branchTag}, ${fixedTag}"
 
-                    // Build the Docker image using docker.build
-                    docker.build("${DOCKERHUB_REPO}:${commitHash}")
-                    docker.build("${DOCKERHUB_REPO}:${branchName}")
-                    docker.build("${DOCKERHUB_REPO}:${FIXED_IMAGE_TAG}")
+                    // Build the Docker images with --no-cache flag to avoid using cache
+                    docker.build("${DOCKERHUB_REPO}:${commitHash}", "--no-cache .")
+                    docker.build("${DOCKERHUB_REPO}:${branchName}", "--no-cache .")
+                    docker.build("${DOCKERHUB_REPO}:${FIXED_IMAGE_TAG}", "--no-cache .")
                 }
             }
         }
