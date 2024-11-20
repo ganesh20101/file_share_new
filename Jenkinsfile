@@ -11,7 +11,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning repository'
-               // git 'https://github.com/ganesh20101/file_share_new.git'
+                git 'https://github.com/ganesh20101/file_share_new.git'
             }
         }
 
